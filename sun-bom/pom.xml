@@ -5,6 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>sun-commons</module>
+        <module>sun-codegen-plugin</module>
+        <module>sun-commons/sun-jpa-spring-boot-start</module>
     </modules>
 
     <parent>
@@ -26,6 +28,8 @@
         <java.version>1.8</java.version>
         <jdk.version>1.8</jdk.version>
         <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
+        <spring-cloud-version>Hoxton.SR12</spring-cloud-version>
+        <querydsl-verion>5.0.0</querydsl-verion>
         <fastjson-version>1.2.78</fastjson-version>
         <guava-version>31.0.1-jre</guava-version>
         <swagger-version>2.9.2</swagger-version>
@@ -41,10 +45,45 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-sql</artifactId>
+                <version>${querydsl-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-collections</artifactId>
+                <version>${querydsl-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-sql-spring</artifactId>
+                <version>${querydsl-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-sql-codegen</artifactId>
+                <version>${querydsl-verion}</version>
+                <scope>provided</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>

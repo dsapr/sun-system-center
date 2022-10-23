@@ -19,6 +19,7 @@
 
     <modules>
         <module>sun-mybatis-spring-boot-starter</module>
+        <module>sun-jpa-spring-boot-starter</module>
     </modules>
 
     <properties>
