@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!--    <parent>-->
-<!--        <groupId>com.dsapr</groupId>-->
-<!--        <artifactId>sun-bom</artifactId>-->
-<!--        <version>1.0-SNAPSHOT</version>-->
-<!--    </parent>-->
+    <parent>
+        <groupId>com.dsapr</groupId>
+        <artifactId>sun-bom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>com.dsapr</groupId>
     <artifactId>sun-system-center</artifactId>
@@ -84,7 +84,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.only4play.system.SystemCenterApplication</mainClass>
+                    <mainClass>com.dsapr.system.SystemCenterApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -104,8 +104,8 @@
                     <target>1.8</target>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>com.only4play</groupId>
-                            <artifactId>op-codegen-apt</artifactId>
+                            <groupId>com.dsapr</groupId>
+                            <artifactId>sun-codegen-plugin</artifactId>
                             <version>1.0-SNAPSHOT</version>
                         </path>
                         <path>

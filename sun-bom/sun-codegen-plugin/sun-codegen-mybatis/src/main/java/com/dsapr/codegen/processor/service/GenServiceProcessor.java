@@ -2,11 +2,11 @@ package com.dsapr.codegen.processor.service;
 
 
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.processor.DefaultNameContext;
-import com.only4play.codegen.spi.CodeGenProcessor;
-import com.only4play.codegen.util.StringUtils;
-import com.only4play.common.model.PageRequestWrapper;
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.processor.DefaultNameContext;
+import com.dsapr.codegen.spi.CodeGenProcessor;
+import com.dsapr.codegen.util.StringUtils;
+import com.dsapr.common.model.PageRequestWrapper;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;

@@ -1,15 +1,16 @@
 package com.dsapr.codegen.processor.controller;
 
 
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.processor.DefaultNameContext;
+import com.dsapr.codegen.spi.CodeGenProcessor;
+import com.dsapr.codegen.util.StringUtils;
+import com.dsapr.common.constants.CodeEnum;
+import com.dsapr.common.model.JsonObject;
+import com.dsapr.common.model.PageRequestWrapper;
+import com.dsapr.common.model.PageResult;
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.processor.DefaultNameContext;
-import com.only4play.codegen.spi.CodeGenProcessor;
-import com.only4play.codegen.util.StringUtils;
-import com.only4play.common.constants.CodeEnum;
-import com.only4play.common.model.JsonObject;
-import com.only4play.common.model.PageRequestWrapper;
-import com.only4play.common.model.PageResult;
+
 import com.squareup.javapoet.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

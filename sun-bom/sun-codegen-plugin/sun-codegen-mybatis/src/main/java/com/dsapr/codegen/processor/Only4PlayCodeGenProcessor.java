@@ -24,10 +24,14 @@ public class Only4PlayCodeGenProcessor extends AbstractProcessor {
 
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+    // 遍历取到的注解
     annotations.stream().forEach(an -> {
+      // 当前遍历到的注解的类
       Set<? extends Element> typeElements = roundEnv.getElementsAnnotatedWith(an);
       Set<TypeElement> types = ElementFilter.typesIn(typeElements);
+      // 遍历某一注解的类
       for (TypeElement typeElement : types){
+        // 获取对应的 processor
         CodeGenProcessor codeGenProcessor = CodeGenProcessorRegistry.find(
             an.getQualifiedName().toString());
         try {

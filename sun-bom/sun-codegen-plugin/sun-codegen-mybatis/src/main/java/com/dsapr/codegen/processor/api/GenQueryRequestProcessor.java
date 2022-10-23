@@ -1,11 +1,12 @@
 package com.dsapr.codegen.processor.api;
 
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.processor.DefaultNameContext;
+import com.dsapr.codegen.processor.query.QueryItem;
+import com.dsapr.codegen.spi.CodeGenProcessor;
+import com.dsapr.common.model.Request;
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.processor.DefaultNameContext;
-import com.only4play.codegen.processor.query.QueryItem;
-import com.only4play.codegen.spi.CodeGenProcessor;
-import com.only4play.common.model.Request;
+
 import com.squareup.javapoet.TypeSpec;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.lang.annotation.Annotation;

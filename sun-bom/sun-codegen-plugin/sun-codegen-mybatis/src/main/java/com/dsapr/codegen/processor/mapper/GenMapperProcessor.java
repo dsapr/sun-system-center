@@ -1,12 +1,12 @@
 package com.dsapr.codegen.processor.mapper;
 
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.processor.DefaultNameContext;
-import com.only4play.codegen.spi.CodeGenProcessor;
-import com.only4play.codegen.util.StringUtils;
-import com.only4play.common.mapper.DateMapper;
-import com.only4play.common.mapper.GenericEnumMapper;
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.processor.DefaultNameContext;
+import com.dsapr.codegen.spi.CodeGenProcessor;
+import com.dsapr.codegen.util.StringUtils;
+import com.dsapr.common.mapper.DateMapper;
+import com.dsapr.common.mapper.GenericEnumMapper;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;

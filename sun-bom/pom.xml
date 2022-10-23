@@ -6,7 +6,6 @@
     <modules>
         <module>sun-commons</module>
         <module>sun-codegen-plugin</module>
-        <module>sun-commons/sun-jpa-spring-boot-start</module>
     </modules>
 
     <parent>
@@ -29,6 +28,8 @@
         <jdk.version>1.8</jdk.version>
         <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
         <spring-cloud-version>Hoxton.SR12</spring-cloud-version>
+        <spring-boot-maven-verison>2.4.6</spring-boot-maven-verison>
+        <mapstruct-version>1.4.2.Final</mapstruct-version>
         <querydsl-verion>5.0.0</querydsl-verion>
         <fastjson-version>1.2.78</fastjson-version>
         <guava-version>31.0.1-jre</guava-version>
@@ -55,6 +56,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct-version}</version>
             </dependency>
 
             <dependency>

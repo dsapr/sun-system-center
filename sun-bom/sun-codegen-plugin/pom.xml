@@ -16,6 +16,7 @@
 
     <modules>
         <module>sun-codegen-mybatis</module>
+        <module>sun-codegen-test</module>
     </modules>
 
     <properties>

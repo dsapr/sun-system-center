@@ -1,8 +1,8 @@
 package com.dsapr.codegen.processor.creator;
 
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.spi.CodeGenProcessor;
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.spi.CodeGenProcessor;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeSpec.Builder;

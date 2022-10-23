@@ -1,5 +1,6 @@
 package com.dsapr.codegen.processor.vo;
 
+import com.dsapr.jpa.support.BaseJpaAggregate;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -22,12 +23,12 @@ public class AbstractBaseJpaVO {
     )
     private Long updatedAt;
 
-//    protected AbstractBaseJpaVO(BaseJpaAggregate source) {
-//        this.setVersion(source.getVersion());
-//        this.setId(source.getId());
-//        this.setCreatedAt(source.getCreatedAt().toEpochMilli());
-//        this.setUpdatedAt(source.getUpdatedAt().toEpochMilli());
-//    }
+    protected AbstractBaseJpaVO(BaseJpaAggregate source) {
+        this.setVersion(source.getVersion());
+        this.setId(source.getId());
+        this.setCreatedAt(source.getCreatedAt().toEpochMilli());
+        this.setUpdatedAt(source.getUpdatedAt().toEpochMilli());
+    }
 
     protected AbstractBaseJpaVO() {
     }

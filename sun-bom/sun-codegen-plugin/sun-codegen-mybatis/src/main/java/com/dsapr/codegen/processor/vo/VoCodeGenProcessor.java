@@ -43,6 +43,7 @@ public class VoCodeGenProcessor extends BaseCodeGenProcessor {
     String className = PREFIX + typeElement.getSimpleName() + SUFFIX;
     String sourceClassName = typeElement.getSimpleName() + SUFFIX;
     Builder builder = TypeSpec.classBuilder(className)
+        // 继承父类
         .superclass(AbstractBaseJpaVO.class)
         .addModifiers(Modifier.PUBLIC)
         .addAnnotation(Schema.class)
@@ -68,5 +69,8 @@ public class VoCodeGenProcessor extends BaseCodeGenProcessor {
     // 生成 java 文件
     genJavaFile(packageName, builder);
     genJavaFile(packageName, getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
+    // 生成源文件
+    genJavaSourceFile(packageName,
+            typeElement.getAnnotation(GenVo.class).sourcePath(), builder);
   }
 }

@@ -1,10 +1,11 @@
 package com.dsapr.codegen.processor.repository;
 
 
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.spi.CodeGenProcessor;
+import com.dsapr.jpa.support.BaseRepository;
 import com.google.auto.service.AutoService;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.spi.CodeGenProcessor;
-import com.only4play.jpa.support.BaseRepository;
+
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;

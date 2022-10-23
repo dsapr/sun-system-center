@@ -2,8 +2,8 @@ package com.dsapr.codegen.processor.updater;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.CaseFormat;
-import com.only4play.codegen.processor.BaseCodeGenProcessor;
-import com.only4play.codegen.spi.CodeGenProcessor;
+import com.dsapr.codegen.processor.BaseCodeGenProcessor;
+import com.dsapr.codegen.spi.CodeGenProcessor;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
