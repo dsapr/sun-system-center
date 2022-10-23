@@ -31,21 +31,5 @@ import lombok.Data;
 @GenVo(pkgName = "com.dsapr.vo")
 @Data
 public class Student extends BaseJpaAggregate {
-
-  @Convert(converter = ValidStatusConverter.class)
-  @IgnoreUpdater
-  @IgnoreCreator
-  private ValidStatus validStatus;
-
-  public void init() {
-    setValidStatus(ValidStatus.VALID);
-  }
-
-  public void valid(){
-    setValidStatus(ValidStatus.VALID);
-  }
-
-  public void invalid(){
-    setValidStatus(ValidStatus.INVALID);
-  }
+  private String name;
 }

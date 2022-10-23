@@ -1,6 +1,7 @@
 package com.dsapr.codegen.processor.service;
 
 
+import com.dsapr.codegen.context.ProcessingEnvironmentHolder;
 import com.dsapr.codegen.processor.BaseCodeGenProcessor;
 import com.dsapr.codegen.processor.DefaultNameContext;
 import com.dsapr.codegen.spi.CodeGenProcessor;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
 import java.lang.annotation.Annotation;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,6 +52,8 @@ public class GenServiceImplProcessor extends BaseCodeGenProcessor {
         .addAnnotation(RequiredArgsConstructor.class)
         .addModifiers(Modifier.PUBLIC);
     if(StringUtils.containsNull(nameContext.getRepositoryPackageName())){
+      ProcessingEnvironmentHolder.getEnvironment().getMessager().printMessage(Diagnostic.Kind.ERROR,"Error: nameContext.getRepositoryPackageName is null");
+      System.out.println("Error: nameContext.getRepositoryPackageName is null");
       return;
     }
     String repositoryFieldName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,
