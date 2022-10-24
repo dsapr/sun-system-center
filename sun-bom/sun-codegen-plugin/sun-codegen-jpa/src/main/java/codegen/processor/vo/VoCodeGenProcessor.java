@@ -1,4 +1,4 @@
-package com.dsapr.codegen.processor.vo;
+package codegen.processor.vo;
 
 import com.dsapr.codegen.processor.BaseCodeGenProcessor;
 import com.dsapr.codegen.spi.CodeGenProcessor;
