@@ -67,7 +67,13 @@ public class VoCodeGenProcessor extends BaseCodeGenProcessor {
     builder.addMethod(constructorSpecBuilder.build());
     String packageName = generatePackage(typeElement);
     // 生成 java 文件
-    genJavaFile(packageName, builder);
-    genJavaFile(packageName, getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
+    // genJavaFile(packageName, builder);
+    // genJavaFile(packageName, getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
+    genJavaSourceFile(packageName,
+            typeElement.getAnnotation(GenVo.class).sourcePath(),
+            builder);
+    genJavaSourceFile(packageName,
+            typeElement.getAnnotation(GenVo.class).sourcePath(),
+            getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
   }
 }
