@@ -28,7 +28,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
 
-@GenVo(pkgName = "com.dsapr.vo")
+// @GenVo(pkgName = "com.dsapr.vo")
+@GenRepository(pkgName = "com.dsapr.vo")
 @Data
 public class Student extends BaseJpaAggregate {
   private String name;
