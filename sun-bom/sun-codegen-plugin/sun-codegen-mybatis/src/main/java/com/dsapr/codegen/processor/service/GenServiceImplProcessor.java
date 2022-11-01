@@ -1,6 +1,7 @@
 package com.dsapr.codegen.processor.service;
 
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dsapr.codegen.context.ProcessingEnvironmentHolder;
 import com.dsapr.codegen.processor.BaseCodeGenProcessor;
 import com.dsapr.codegen.processor.DefaultNameContext;
@@ -44,6 +45,8 @@ public class GenServiceImplProcessor extends BaseCodeGenProcessor {
     DefaultNameContext nameContext = getNameContext(typeElement);
     String className = typeElement.getSimpleName() + IMPL_SUFFIX;
     TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(className)
+        // 实现接口    // 生成包含泛型的类
+        .superclass(ParameterizedTypeName.get(ClassName.get(ServiceImpl.class), ClassName.get(nameContext.getRepositoryPackageName(), nameContext.getRepositoryClassName()),ClassName.get(typeElement)))
         .addSuperinterface(
             ClassName.get(nameContext.getServicePackageName(), nameContext.getServiceClassName()))
         .addAnnotation(Transactional.class)
@@ -81,6 +84,8 @@ public class GenServiceImplProcessor extends BaseCodeGenProcessor {
     Optional<MethodSpec> findByPageMethod = findByPageMethod(typeElement, nameContext,
         repositoryFieldName);
     findByPageMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+
+    // 生成 java 源代码
     genJavaSourceFile(generatePackage(typeElement),
         typeElement.getAnnotation(GenServiceImpl.class).sourcePath(), typeSpecBuilder);
   }

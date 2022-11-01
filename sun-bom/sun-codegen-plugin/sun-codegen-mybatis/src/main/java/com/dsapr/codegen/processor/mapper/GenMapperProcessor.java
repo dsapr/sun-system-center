@@ -35,35 +35,50 @@ public class GenMapperProcessor extends BaseCodeGenProcessor {
 
     @Override
     protected void generateClass(TypeElement typeElement, RoundEnvironment roundEnvironment) {
+        // 生成类名
         String className = typeElement.getSimpleName() + SUFFIX;
+        // 生成包名
         String packageName = typeElement.getAnnotation(GenMapper.class).pkgName();
+        // 生成注解对象
         AnnotationSpec mapperAnnotation = AnnotationSpec.builder(Mapper.class)
                 .addMember("uses", "$T.class", GenericEnumMapper.class)
                 .addMember("uses", "$T.class", DateMapper.class)
                 .build();
+        // 生成类、接口、枚举对象
         TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(className)
                 .addAnnotation(mapperAnnotation)
                 .addModifiers(Modifier.PUBLIC);
+        // 配置生成成员变量
         FieldSpec instance = FieldSpec
+                // 根据包名、类名获取类型 命名为"INSTANCE"
                 .builder(ClassName.get(packageName, className), "INSTANCE")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
                 .initializer("$T.getMapper($T.class)",
                         Mappers.class, ClassName.get(packageName, className))
                 .build();
+        // 在类中加入此成员变量
         typeSpecBuilder.addField(instance);
         DefaultNameContext nameContext = getNameContext(typeElement);
+        // dto to entity method
         Optional<MethodSpec> dtoToEntityMethod = dtoToEntityMethod(typeElement, nameContext);
         dtoToEntityMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+        // request to updater
         Optional<MethodSpec> request2UpdaterMethod = request2UpdaterMethod(nameContext);
         request2UpdaterMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+        // request to dto
         Optional<MethodSpec> request2DtoMethod = request2DtoMethod(nameContext);
         request2DtoMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+        // request to query
         Optional<MethodSpec> request2QueryMethod = request2QueryMethod(nameContext);
         request2QueryMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+        // vo to response
         Optional<MethodSpec> vo2ResponseMethod = vo2ResponseMethod(nameContext);
         vo2ResponseMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+        // vo to customResponse
         Optional<MethodSpec> vo2CustomResponseMethod = vo2CustomResponseMethod(nameContext);
         vo2CustomResponseMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+
+        // 生成 java 源文件
         genJavaSourceFile(generatePackage(typeElement),
                 typeElement.getAnnotation(GenMapper.class).sourcePath(), typeSpecBuilder);
     }

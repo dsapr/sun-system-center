@@ -1,22 +1,24 @@
 package com.dsapr.codegen.processor.service;
 
 
-import com.google.auto.service.AutoService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dsapr.codegen.processor.BaseCodeGenProcessor;
 import com.dsapr.codegen.processor.DefaultNameContext;
 import com.dsapr.codegen.spi.CodeGenProcessor;
 import com.dsapr.codegen.util.StringUtils;
 import com.dsapr.common.model.PageRequestWrapper;
+import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-import java.lang.annotation.Annotation;
-import java.util.Optional;
+import org.springframework.data.domain.Page;
+
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import org.springframework.data.domain.Page;
+import java.lang.annotation.Annotation;
+import java.util.Optional;
 
 /**
  * @author gim
@@ -32,20 +34,30 @@ public class GenServiceProcessor extends BaseCodeGenProcessor {
   protected void generateClass(TypeElement typeElement, RoundEnvironment roundEnvironment) {
     String className = SERVICE_PREFIX + typeElement.getSimpleName() + SERVICE_SUFFIX;
     TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(className)
+        // 实现接口    // 生成包含泛型的类
+        .addSuperinterface(ParameterizedTypeName.get(ClassName.get(IService.class), ClassName.get(typeElement)))
         .addModifiers(Modifier.PUBLIC);
     DefaultNameContext nameContext = getNameContext(typeElement);
+    // create
     Optional<MethodSpec> createMethod = createMethod(typeElement, nameContext);
     createMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+    // update
     Optional<MethodSpec> updateMethod = updateMethod(typeElement, nameContext);
     updateMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+    // valid
     Optional<MethodSpec> validMethod = validMethod(typeElement);
     validMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+    // invalid
     Optional<MethodSpec> invalidMethod = invalidMethod(typeElement);
     invalidMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+    // find by id
     Optional<MethodSpec> findByIdMethod = findByIdMethod(nameContext);
     findByIdMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+    // find by page
     Optional<MethodSpec> findByPageMethod = findByPageMethod(nameContext);
     findByPageMethod.ifPresent(m -> typeSpecBuilder.addMethod(m));
+
+    // 生成 java 源代码
     genJavaSourceFile(generatePackage(typeElement),
         typeElement.getAnnotation(GenService.class).sourcePath(), typeSpecBuilder);
   }

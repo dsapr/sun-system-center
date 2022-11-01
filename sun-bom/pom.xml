@@ -6,6 +6,7 @@
     <modules>
         <module>sun-commons</module>
         <module>sun-codegen-plugin</module>
+        <module>sun-archetypes</module>
     </modules>
 
     <parent>
@@ -159,5 +160,4 @@
             <url>http://124.222.246.21:8081/repository/maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
 </project>

@@ -3,16 +3,16 @@ package com.dsapr.codegen.processor.repository;
 
 import com.dsapr.codegen.processor.BaseCodeGenProcessor;
 import com.dsapr.codegen.spi.CodeGenProcessor;
-import com.dsapr.jpa.support.BaseRepository;
+import com.dsapr.mybatis.support.BaseRepository;
 import com.google.auto.service.AutoService;
-
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-import java.lang.annotation.Annotation;
+
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import java.lang.annotation.Annotation;
 
 /**
  * @author gim
@@ -24,10 +24,14 @@ public class GenRepositoryProcessor extends BaseCodeGenProcessor {
 
   @Override
   protected void generateClass(TypeElement typeElement, RoundEnvironment roundEnvironment) {
+    // 类名 ---> xxx + Repository
     String className = typeElement.getSimpleName() + REPOSITORY_SUFFIX;
     TypeSpec.Builder typeSpecBuilder = TypeSpec.interfaceBuilder(className)
-        .addSuperinterface(ParameterizedTypeName.get(ClassName.get(BaseRepository.class), ClassName.get(typeElement),ClassName.get(Long.class)))
+         // 实现接口        // 生成包含泛型的类
+        .addSuperinterface(ParameterizedTypeName.get(ClassName.get(BaseRepository.class), ClassName.get(typeElement)))
         .addModifiers(Modifier.PUBLIC);
+
+    // 生成 java 源文件
     genJavaSourceFile(generatePackage(typeElement),typeElement.getAnnotation(GenRepository.class).sourcePath(),typeSpecBuilder);
   }
 
