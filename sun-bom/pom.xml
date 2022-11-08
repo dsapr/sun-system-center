@@ -29,6 +29,7 @@
         <jdk.version>1.8</jdk.version>
         <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
         <spring-cloud-version>Hoxton.SR12</spring-cloud-version>
+        <spring-cloud-alibaba-version>2.2.7.RELEASE</spring-cloud-alibaba-version>
         <spring-boot-maven-verison>2.4.6</spring-boot-maven-verison>
         <mapstruct-version>1.4.2.Final</mapstruct-version>
         <querydsl-verion>5.0.0</querydsl-verion>
@@ -50,6 +51,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -95,6 +103,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.6</version>
             </dependency>
 
             <!-- swagger -->

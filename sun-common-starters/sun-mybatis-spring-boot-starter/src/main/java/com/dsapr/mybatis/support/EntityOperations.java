@@ -16,5 +16,4 @@ public abstract class EntityOperations {
     return new EntityCreator(baseMapper);
   }
 
-
 }

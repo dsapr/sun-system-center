@@ -3,16 +3,16 @@
 #set( $symbol_escape = '\' )
 package ${package}.infrastructure.config;
 
-import com.only4play.common.constants.CodeEnum;
-import com.only4play.common.exception.BusinessException;
-import com.only4play.common.exception.SystemException;
-import com.only4play.common.model.JsonObject;
+import com.dsapr.common.constants.CodeEnum;
+import com.dsapr.common.exception.BusinessException;
+import com.dsapr.common.exception.SystemException;
+import com.dsapr.common.model.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @author gim
+ * 全局异常处理
  */
 @RestControllerAdvice
 @Slf4j

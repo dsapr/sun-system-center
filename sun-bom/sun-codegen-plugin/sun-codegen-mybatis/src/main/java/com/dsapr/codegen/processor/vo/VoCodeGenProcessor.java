@@ -19,62 +19,62 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author gim vo 代码生成器
+ * @author dsapr vo 代码生成器
  */
 @AutoService(value = CodeGenProcessor.class)
 public class VoCodeGenProcessor extends BaseCodeGenProcessor {
 
-  public static final String SUFFIX = "VO";
+    public static final String SUFFIX = "VO";
 
-  @Override
-  public Class<? extends Annotation> getAnnotation() {
-    return GenVo.class;
-  }
+    @Override
+    public Class<? extends Annotation> getAnnotation() {
+        return GenVo.class;
+    }
 
-  @Override
-  public String generatePackage(TypeElement typeElement) {
-    return typeElement.getAnnotation(GenVo.class).pkgName();
-  }
+    @Override
+    public String generatePackage(TypeElement typeElement) {
+        return typeElement.getAnnotation(GenVo.class).pkgName();
+    }
 
-  @Override
-  protected void generateClass(TypeElement typeElement, RoundEnvironment roundEnvironment) {
-    Set<VariableElement> fields = findFields(typeElement,
-        ve -> Objects.isNull(ve.getAnnotation(IgnoreVo.class)));
-    String className = PREFIX + typeElement.getSimpleName() + SUFFIX;
-    String sourceClassName = typeElement.getSimpleName() + SUFFIX;
-    Builder builder = TypeSpec.classBuilder(className)
-        // 继承父类
-        .superclass(AbstractBaseJpaVO.class)
-        .addModifiers(Modifier.PUBLIC)
-        .addAnnotation(Schema.class)
-        .addAnnotation(Data.class);
-    addSetterAndGetterMethod(builder, fields);
-    // 生成构造器
-    MethodSpec.Builder constructorSpecBuilder = MethodSpec.constructorBuilder()
-        .addParameter(TypeName.get(typeElement.asType()), "source") // 参数类型、名称
-        .addModifiers(Modifier.PUBLIC); // 修饰符
-    // 方法体
-    constructorSpecBuilder.addStatement("super(source)");
-    fields.stream().forEach(f -> {
-      // 替换占位
-      constructorSpecBuilder.addStatement("this.set$L(source.get$L())", getFieldDefaultName(f),
-          getFieldDefaultName(f));
-    });
-    // 默认构造方法
-    builder.addMethod(MethodSpec.constructorBuilder()
-        .addModifiers(Modifier.PROTECTED)
-        .build());
-    builder.addMethod(constructorSpecBuilder.build());
-    String packageName = generatePackage(typeElement);
-    // 生成 java 文件
-    // 估计想把 base 生成到 source
-    // genJavaFile(packageName, builder);
-    // genJavaFile(packageName, getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
-    genJavaSourceFile(packageName,
-            typeElement.getAnnotation(GenVo.class).sourcePath(),
-            builder);
-    genJavaSourceFile(packageName,
-            typeElement.getAnnotation(GenVo.class).sourcePath(),
-            getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
-  }
+    @Override
+    protected void generateClass(TypeElement typeElement, RoundEnvironment roundEnvironment) {
+        Set<VariableElement> fields = findFields(typeElement,
+                ve -> Objects.isNull(ve.getAnnotation(IgnoreVo.class)));
+        String className = PREFIX + typeElement.getSimpleName() + SUFFIX;
+        String sourceClassName = typeElement.getSimpleName() + SUFFIX;
+        Builder builder = TypeSpec.classBuilder(className)
+                // 继承父类
+                .superclass(AbstractBaseVO.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Schema.class)
+                .addAnnotation(Data.class);
+        addSetterAndGetterMethod(builder, fields);
+        // 生成构造器
+        MethodSpec.Builder constructorSpecBuilder = MethodSpec.constructorBuilder()
+                .addParameter(TypeName.get(typeElement.asType()), "source") // 参数类型、名称
+                .addModifiers(Modifier.PUBLIC); // 修饰符
+        // 方法体
+        constructorSpecBuilder.addStatement("super(source)");
+        fields.stream().forEach(f -> {
+            // 替换占位 生成 set
+            constructorSpecBuilder.addStatement("this.set$L(source.get$L())", getFieldDefaultName(f),
+                    getFieldDefaultName(f));
+        });
+        // 默认构造方法
+        builder.addMethod(MethodSpec.constructorBuilder()
+                .addModifiers(Modifier.PROTECTED)
+                .build());
+        builder.addMethod(constructorSpecBuilder.build());
+        String packageName = generatePackage(typeElement);
+        // 生成 java 文件
+        // 估计想把 base 生成到 source
+        genJavaFile(packageName, builder);
+        genJavaFile(packageName, getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
+//      genJavaSourceFile(packageName,
+//              typeElement.getAnnotation(GenVo.class).sourcePath(),
+//              builder);
+//      genJavaSourceFile(packageName,
+//              typeElement.getAnnotation(GenVo.class).sourcePath(),
+//              getSourceTypeWithConstruct(typeElement,sourceClassName, packageName, className));
+    }
 }

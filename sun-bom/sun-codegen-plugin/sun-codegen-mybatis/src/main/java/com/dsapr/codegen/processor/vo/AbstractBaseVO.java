@@ -1,11 +1,13 @@
 package com.dsapr.codegen.processor.vo;
 
-import com.dsapr.jpa.support.BaseJpaAggregate;
+import com.dsapr.mybatis.support.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
-public class AbstractBaseJpaVO {
+public class AbstractBaseVO {
     @Schema(
             title = "数据版本"
     )
@@ -17,19 +19,19 @@ public class AbstractBaseJpaVO {
     @Schema(
             title = "创建时间"
     )
-    private Long createdAt;
+    private LocalDateTime createdTime;
     @Schema(
             title = "修改时间"
     )
-    private Long updatedAt;
+    private LocalDateTime updatedTime;
 
-    protected AbstractBaseJpaVO(BaseJpaAggregate source) {
+    protected AbstractBaseVO(BaseEntity source) {
         this.setVersion(source.getVersion());
         this.setId(source.getId());
-        this.setCreatedAt(source.getCreatedAt().toEpochMilli());
-        this.setUpdatedAt(source.getUpdatedAt().toEpochMilli());
+        this.setCreatedTime(source.getCreatedTime());
+        this.setUpdatedTime(source.getUpdatedTime());
     }
 
-    protected AbstractBaseJpaVO() {
+    protected AbstractBaseVO() {
     }
 }

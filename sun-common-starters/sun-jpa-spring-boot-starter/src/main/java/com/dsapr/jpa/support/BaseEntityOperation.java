@@ -1,22 +1,23 @@
 package com.dsapr.jpa.support;
 
-import static org.springframework.util.CollectionUtils.isEmpty;
-
 import com.dsapr.common.exception.ValidationException;
 import com.dsapr.common.model.ValidateResult;
 import com.dsapr.common.validator.ValidateGroup;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 /**
  * @author gim 2022/3/5 10:07 下午
  */
-public abstract class BaseEntityOperation implements com.dsapr.jpa.support.EntityOperation {
+public abstract class BaseEntityOperation implements EntityOperation {
 
   static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 

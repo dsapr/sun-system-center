@@ -1,7 +1,7 @@
 package com.dsapr.codegen.processor.vo;
 
 /**
- * @Author: Gim
+ * @Author: dsapr
  * @Description:
  */
 public @interface IgnoreVo {
