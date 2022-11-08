@@ -21,7 +21,10 @@ public class EntityUpdater<T> extends BaseEntityOperation implements Loader<T>,
   private final BaseMapper<T> baseMapper;
   private T entity;
   private Consumer<T> successHook = t -> log.info("update success");
-  private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
+  private Consumer<? super Throwable> errorHook = e -> {
+    log.error(e.getMessage(), e);
+    throw new RuntimeException(e);
+  };
 
   public EntityUpdater(BaseMapper<T> baseMapper) {
     this.baseMapper = baseMapper;

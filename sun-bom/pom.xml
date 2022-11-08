@@ -164,12 +164,12 @@
     <!-- mvn deploy 将工程打成的jar发布到私服nexus -->
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
+            <id>maven-releases</id>
             <name>User Project Release</name>
             <url>http://124.222.246.21:8081/repository/maven-releases</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
+            <id>maven-snapshots</id>
             <name>User Project SNAPSHOTS</name>
             <url>http://124.222.246.21:8081/repository/maven-snapshots</url>
         </snapshotRepository>

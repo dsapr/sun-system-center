@@ -18,7 +18,10 @@ public class EntityCreator<T> extends BaseEntityOperation implements Create<T>, 
   private final BaseMapper<T> baseMapper;
   private T t;
   private Consumer<T> successHook = t -> log.info("save success");
-  private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
+  private Consumer<? super Throwable> errorHook = e -> {
+    log.error(e.getMessage(), e);
+    throw new RuntimeException(e);
+  };
 
   public EntityCreator(BaseMapper<T> baseMapper) {
     this.baseMapper = baseMapper;
